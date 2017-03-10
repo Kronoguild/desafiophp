@@ -1,7 +1,9 @@
 <html>
 	<head>
 		<title>	Desafio </title>
-		
+		<meta charset="UTF-8">
+		<!-- Esta linea es importante para que la pÃƒÂ¡gina sea responsive: -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Esta es la forma de levantar archivos de CSS -->
 		<link rel="stylesheet" href="../css/estilos.css">
 		
@@ -40,13 +42,14 @@
 
 		if ($result->num_rows > 0) {
 
-	    echo "<center><div><table border=\"0\"><tr><th>Nombre</th><th>Descripcion</th><th>Carga Horaria</th><th>Carrera</th><th>Carga Horaria</th></tr>";
+	    echo "<center><div><table border=\"0\"><tr><th>Nombre</th><th>Descripcion</th><th>Carga Horaria</th><th>Carrera</th><th>Eliminar Materia</th></tr>";
 
 
 	    while($row = $result->fetch_assoc()) {
 
 
-	         echo "<tr><td><center>".$row["materiasNombre"]."</center></td><td> ".$row["descripcion"]."</td><td><center>".$row["carga_horaria"]." horas</center></td><td>".$row["nombre"]."</td></tr>";
+	         echo "<tr><td><center>".$row["materiasNombre"]."</center></td><td> ".$row["descripcion"]."</td><td><center>".$row["carga_horaria"]." horas</center></td>
+	         <td>".$row["nombre"]."</td><td></td></tr>";
 
 	    }
 

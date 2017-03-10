@@ -1,0 +1,35 @@
+.titulos{
+	color: blue;
+	text-align: center;	
+}
+
+.texto{
+	font-weight: bold;
+	text-align: center;
+	
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+.error {
+	border-color: red;
+    box-shadow: red;
+    outline: 0 none;
+}
+
+.correcto {
+	border-color: #39ff14;
+    box-shadow: green;
+    outline: 0 none;
+ }
