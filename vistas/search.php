@@ -18,10 +18,9 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-		
 		<!-- Esta es la forma de levantar archivos de CSS -->
 		<link rel="stylesheet" href="../css/estilos.css">
-
+		
 	</head>
 	
 	<body>
@@ -37,20 +36,10 @@
   </div>
 </nav>
 		<h1 class="titulos"> 
-			Listado de materias 
+			Bienvenido al Desafio! 
 		</h1>
 <div class="container">
-	<form action="search.php"  method="post">
-	  <div class="input-group">
-	    <input type="text" class="form-control" placeholder="Buscar materia" name="busqueda">
-	    <div class="input-group-btn">
-	      <button class="btn btn-default" type="submit">
-	       <i class="glyphicon glyphicon-search"></i>
-	      </button>
-	    </div>
-
-	  </div>
-	</form>
+	
 		
 		<?php
 
@@ -58,6 +47,8 @@
 		$user = 'root';
 		$pass = '';
 		$db = 'desafio';
+
+		$palabraClave = $_POST['busqueda']; //Contenido a buscar
 
 		$conn = new mysqli($host,$user,$pass,$db);
 
@@ -72,13 +63,14 @@
 				FROM 
 					materias,carreras
 				WHERE 
-					materias.carrera_id = carreras.id";
+					materias.carrera_id = carreras.id AND
+					materias.nombre LIKE '%{$palabraClave}%'";
 
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
 
-	    echo "<form method=\"post\" action=\"\"><center><div><table border=\"0\" class=\"table table-striped\"><tr><th>Nombre</th><th>Descripcion</th><th>Carga Horaria</th><th>Carrera</th><th>Opciones</th></tr>";
+	    echo "<center><div><table border=\"0\" class=\"table table-striped\"><tr><th>Nombre</th><th>Descripcion</th><th>Carga Horaria</th><th>Carrera</th><th>Opciones</th></tr>";
 
 
 	    while($row = $result->fetch_assoc()) {
@@ -88,7 +80,7 @@
 
 	    }
 
-	   echo "</table></div></center></form>";
+	    echo "</table></div></center>";
 
 	} else {
 
@@ -96,20 +88,18 @@
 
 	}
 
-	 if(isset($_POST['remove'])){
-	     $id = (int)$_POST['remove'];
-	     $removeQuery = "DELETE FROM `materias` WHERE `materias`.`id` = $id";
-	     $result2 = $conn->query($removeQuery);
-	     header("Refresh:0");
- 	}
+	if(isset($_POST['eliminar'])){
+	
+		$sql2= "DELETE FROM `materias` WHERE `materias`.`id` = {$_POST['eliminar']}";
+		$result2 = $conn->query($sql2);
+	}
 
 	$conn->close();
 
+
 		?>
 
-		<a href="nuevaMateria.php">Nueva materia</a>
+		<a href="home.php">Volver</a>
 		</div>
 	</body>
 </html>
-
-<script type="text/javascript" src="../js/home.js"></script>
